@@ -13,7 +13,7 @@ namespace Graphs.Lib
             this.graph = graph;
         }
 
-        public List<Vertex> GetShortestPath(Vertex a, Vertex b)
+        public List<Vertex> GetShortestPath(Vertex from, Vertex to)
         {
             var pathVertices = new List<Vertex>();
             var verticesToVisit = new HashSet<Vertex>();
@@ -23,12 +23,12 @@ namespace Graphs.Lib
                 verticesToVisit.Add(vertex);
             }
 
-            var current = a;
-            pathVertices.Add(a);
+            var current = from;
+            pathVertices.Add(from);
 
             while (verticesToVisit.Any())
             {
-                if (current == b)
+                if (current == to)
                 {
                     break;
                 }

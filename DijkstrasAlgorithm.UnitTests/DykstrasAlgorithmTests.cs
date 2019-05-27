@@ -124,5 +124,42 @@ namespace Graphs.UnitTests
             Assert.IsTrue(path.Contains(e));
             Assert.IsTrue(path.Contains(g));
         }
+
+        [TestMethod]
+        public void GetShortestPath_ReturnsCorrectPath_ForGraphWithManyLowCostEdges()
+        {
+            var graph = new WeightedGraph();
+            var a = new Vertex("A", 0);
+            var b = new Vertex("B", 0);
+            var c = new Vertex("C", 0);
+            var d = new Vertex("D", 0);
+            var e = new Vertex("E", 0);
+            var f = new Vertex("F", 0);
+            var g = new Vertex("G", 0);
+
+            a.AddEdge(new Edge(b, 1));
+            a.AddEdge(new Edge(g, 3));
+            b.AddEdge(new Edge(c, 1));
+            c.AddEdge(new Edge(d, 1));
+            d.AddEdge(new Edge(e, 1));
+            e.AddEdge(new Edge(f, 1));
+            f.AddEdge(new Edge(g, 1));
+
+            graph.AddVertex(a);
+            graph.AddVertex(b);
+            graph.AddVertex(c);
+            graph.AddVertex(d);
+            graph.AddVertex(e);
+            graph.AddVertex(f);
+            graph.AddVertex(g);
+
+            var dijkstrasAlgorithm = new DijkstrasAlgorithm(graph);
+            var path = dijkstrasAlgorithm.GetShortestPath(a, g);
+
+            Assert.AreEqual(2, path.Count);
+            Assert.AreEqual(3, path.Last().Value);
+            Assert.IsTrue(path.Contains(a));
+            Assert.IsTrue(path.Contains(g));
+        }
     }
 }
