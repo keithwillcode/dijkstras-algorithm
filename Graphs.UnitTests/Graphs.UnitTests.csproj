@@ -13,6 +13,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DijkstrasAlgorithm.Lib\Graphs.Lib.csproj" />
+    <ProjectReference Include="..\Graphs.Lib\Graphs.Lib.csproj" />
   </ItemGroup>
 </Project>

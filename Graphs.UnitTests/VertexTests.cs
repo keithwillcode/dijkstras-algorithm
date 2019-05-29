@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using Graphs.Lib;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -5,21 +6,21 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Graphs.UnitTests
 {
     [TestClass]
-    public class UnitTest1
+    public class VertexTests
     {
         [TestMethod]
         public void Constructor_WithNoParameters_SetsInitialValueToMaxInt()
         {
-            var a = new Vertex("A", 0);
+            var a = new Vertex("A");
 
-            Assert.AreEqual(0, a.Value);
+            Assert.AreEqual(Int32.MaxValue, a.Value);
         }
 
         [TestMethod]
         public void AddVertex_AddsEdgeWithWeight()
         {
-            var a = new Vertex("A", 0);
-            var b = new Vertex("B", 0);
+            var a = new Vertex("A");
+            var b = new Vertex("B");
 
             a.AddEdge(new Edge(b, 5));
 

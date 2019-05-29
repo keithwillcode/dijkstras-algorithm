@@ -11,8 +11,8 @@ namespace Graphs.UnitTests
         public void GetShortestPath_ReturnsPath_WhenTwoNodesAreInGraph()
         {
             var graph = new WeightedGraph();
-            var a = new Vertex("A", 0);
-            var b = new Vertex("B", 0);
+            var a = new Vertex("A");
+            var b = new Vertex("B");
 
             a.AddEdge(new Edge(b, 10));
 
@@ -22,7 +22,7 @@ namespace Graphs.UnitTests
             var dijkstrasAlgorithm = new DijkstrasAlgorithm(graph);
             var path = dijkstrasAlgorithm.GetShortestPath(a, b);
 
-            Assert.AreEqual(2, path.Count);
+            Assert.AreEqual(2, path.Count());
             Assert.AreEqual(10, path.Last().Value);
             Assert.IsTrue(path.Contains(a));
             Assert.IsTrue(path.Contains(b));
@@ -32,9 +32,9 @@ namespace Graphs.UnitTests
         public void GetShortestPath_ReturnsCorrectPath_WhenThreeNodesAreInGraph()
         {
             var graph = new WeightedGraph();
-            var a = new Vertex("A", 0);
-            var b = new Vertex("B", 0);
-            var c = new Vertex("C", 0);
+            var a = new Vertex("A");
+            var b = new Vertex("B");
+            var c = new Vertex("C");
 
             a.AddEdge(new Edge(b, 10));
             b.AddEdge(new Edge(c, 5));
@@ -46,7 +46,7 @@ namespace Graphs.UnitTests
             var dijkstrasAlgorithm = new DijkstrasAlgorithm(graph);
             var path = dijkstrasAlgorithm.GetShortestPath(a, c);
 
-            Assert.AreEqual(3, path.Count);
+            Assert.AreEqual(3, path.Count());
             Assert.AreEqual(15, path.Last().Value);
             Assert.IsTrue(path.Contains(a));
             Assert.IsTrue(path.Contains(b));
@@ -57,10 +57,10 @@ namespace Graphs.UnitTests
         public void GetShortestPath_ReturnsCorrectPath_WhenTwoPossiblePathsExist()
         {
             var graph = new WeightedGraph();
-            var a = new Vertex("A", 0);
-            var b = new Vertex("B", 0);
-            var c = new Vertex("C", 0);
-            var d = new Vertex("D", 0);
+            var a = new Vertex("A");
+            var b = new Vertex("B");
+            var c = new Vertex("C");
+            var d = new Vertex("D");
 
             a.AddEdge(new Edge(b, 10));
             a.AddEdge(new Edge(c, 3));
@@ -75,7 +75,7 @@ namespace Graphs.UnitTests
             var dijkstrasAlgorithm = new DijkstrasAlgorithm(graph);
             var path = dijkstrasAlgorithm.GetShortestPath(a, d);
 
-            Assert.AreEqual(3, path.Count);
+            Assert.AreEqual(3, path.Count());
             Assert.AreEqual(4, path.Last().Value);
             Assert.IsTrue(path.Contains(a));
             Assert.IsTrue(path.Contains(c));
@@ -86,13 +86,13 @@ namespace Graphs.UnitTests
         public void GetShortestPath_ReturnsCorrectPath_ForComplexGraph()
         {
             var graph = new WeightedGraph();
-            var a = new Vertex("A", 0);
-            var b = new Vertex("B", 0);
-            var c = new Vertex("C", 0);
-            var d = new Vertex("D", 0);
-            var e = new Vertex("E", 0);
-            var f = new Vertex("F", 0);
-            var g = new Vertex("G", 0);
+            var a = new Vertex("A");
+            var b = new Vertex("B");
+            var c = new Vertex("C");
+            var d = new Vertex("D");
+            var e = new Vertex("E");
+            var f = new Vertex("F");
+            var g = new Vertex("G");
 
             a.AddEdge(new Edge(b, 10));
             a.AddEdge(new Edge(c, 3));
@@ -104,6 +104,7 @@ namespace Graphs.UnitTests
             e.AddEdge(new Edge(f, 19));
             e.AddEdge(new Edge(g, 7));
             e.AddEdge(new Edge(b, 23));
+            f.AddEdge(new Edge(g, 1000));
 
             graph.AddVertex(a);
             graph.AddVertex(b);
@@ -116,12 +117,11 @@ namespace Graphs.UnitTests
             var dijkstrasAlgorithm = new DijkstrasAlgorithm(graph);
             var path = dijkstrasAlgorithm.GetShortestPath(a, g);
 
-            Assert.AreEqual(5, path.Count);
-            Assert.AreEqual(13, path.Last().Value);
+            Assert.AreEqual(4, path.Count());
+            Assert.AreEqual(9, path.Last().Value);
             Assert.IsTrue(path.Contains(a));
             Assert.IsTrue(path.Contains(c));
             Assert.IsTrue(path.Contains(d));
-            Assert.IsTrue(path.Contains(e));
             Assert.IsTrue(path.Contains(g));
         }
 
@@ -129,13 +129,13 @@ namespace Graphs.UnitTests
         public void GetShortestPath_ReturnsCorrectPath_ForGraphWithManyLowCostEdges()
         {
             var graph = new WeightedGraph();
-            var a = new Vertex("A", 0);
-            var b = new Vertex("B", 0);
-            var c = new Vertex("C", 0);
-            var d = new Vertex("D", 0);
-            var e = new Vertex("E", 0);
-            var f = new Vertex("F", 0);
-            var g = new Vertex("G", 0);
+            var a = new Vertex("A");
+            var b = new Vertex("B");
+            var c = new Vertex("C");
+            var d = new Vertex("D");
+            var e = new Vertex("E");
+            var f = new Vertex("F");
+            var g = new Vertex("G");
 
             a.AddEdge(new Edge(b, 1));
             a.AddEdge(new Edge(g, 3));
@@ -156,7 +156,7 @@ namespace Graphs.UnitTests
             var dijkstrasAlgorithm = new DijkstrasAlgorithm(graph);
             var path = dijkstrasAlgorithm.GetShortestPath(a, g);
 
-            Assert.AreEqual(2, path.Count);
+            Assert.AreEqual(2, path.Count());
             Assert.AreEqual(3, path.Last().Value);
             Assert.IsTrue(path.Contains(a));
             Assert.IsTrue(path.Contains(g));
